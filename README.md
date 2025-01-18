@@ -1,2 +1,2 @@
-# Mobile_Class_01
-Assignment 01 for mobile class - Ofir &amp; Kfir
+# Mobile_Class_02
+Assignment 02 for mobile class - Ofir &amp; Kfir
