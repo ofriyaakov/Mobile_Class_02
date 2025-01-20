@@ -1,3 +1,8 @@
 package com.example.studentsapp.model
 
-data class Student()
+data class Student(
+    var name: String,
+    var id: String,
+    var avatarUrl: String,
+    var isChecked: Boolean
+)
