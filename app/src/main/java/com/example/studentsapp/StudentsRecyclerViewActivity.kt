@@ -57,10 +57,16 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         findViewById<Button>(R.id.addStudentButton).setOnClickListener {
             startActivity(Intent(this, AddStudentActivity::class.java))
         }
-
-
-
     }
+
+    override fun onResume() {
+        super.onResume()
+        students = Model.shared.students
+        val adapter = StudentsRecyclerAdapter(students)
+        val recyclerView: RecyclerView = findViewById(R.id.students_recycler_view)
+        recyclerView.adapter = adapter
+    }
+
 
     class StudentViewHolder(
         itemView: View,
