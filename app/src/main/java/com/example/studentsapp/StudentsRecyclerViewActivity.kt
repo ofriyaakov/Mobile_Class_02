@@ -1,10 +1,13 @@
 package com.example.studentsapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studentsapp.adapter.StudentsAdapter
 import com.example.studentsapp.model.Model
 import com.example.studentsapp.model.Student
 
@@ -49,7 +53,15 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
             }
         }
         recyclerView.adapter = adapter
+
+        findViewById<Button>(R.id.addStudentButton).setOnClickListener {
+            startActivity(Intent(this, AddStudentActivity::class.java))
+        }
+
+
+
     }
+
     class StudentViewHolder(
         itemView: View,
         listener: OnItemClickListener?
