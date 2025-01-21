@@ -1,6 +1,7 @@
 package com.example.studentsapp
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +17,12 @@ class AddStudentActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val cancelButton: Button = findViewById(R.id.cancelButton)
+
+        cancelButton.setOnClickListener {
+            finish()
+        }
     }
+
 }
