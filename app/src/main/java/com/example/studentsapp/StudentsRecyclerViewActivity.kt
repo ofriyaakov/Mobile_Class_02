@@ -39,7 +39,6 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
             insets
         }
         students = Model.shared.students
-        Log.d("TAG", "HELLO!")
         val recyclerView: RecyclerView = findViewById(R.id.students_recycler_view)
         recyclerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
