@@ -2,22 +2,18 @@ package com.example.studentsapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studentsapp.adapter.StudentsAdapter
 import com.example.studentsapp.model.Model
 import com.example.studentsapp.model.Student
 
@@ -28,7 +24,7 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         fun onItemClick(student: Student?)
     }
 
-    var students: MutableList<Student>? = null
+    private var students: MutableList<Student>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -43,19 +39,9 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val adapter = StudentsRecyclerAdapter(students)
-        adapter.listener = object : OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                Log.d("TAG", "On click Activity listener on position $position")
-            }
-            override fun onItemClick(student: Student?) {
-                Log.d("TAG", "On student clicked name: ${student?.name}")
-            }
-        }
-        recyclerView.adapter = adapter
-
+        recyclerView.adapter = StudentsRecyclerAdapter(students)
         findViewById<Button>(R.id.addStudentButton).setOnClickListener {
-            startActivity(Intent(this, AddStudentActivity::class.java))
+            toNew()
         }
     }
 
@@ -87,7 +73,6 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
                 }
             }
             itemView.setOnClickListener {
-                Log.d("TAG", "On click listener on position $adapterPosition")
                 listener?.onItemClick(student)
             }
         }
@@ -103,7 +88,7 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
 
     }
     inner class StudentsRecyclerAdapter(private val students: MutableList<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
-        var listener: OnItemClickListener? = null
+        private var listener: OnItemClickListener? = null
         override fun getItemCount(): Int = students?.size ?: 0
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
             val itemView = LayoutInflater.from(parent.context).inflate(
@@ -130,7 +115,9 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         intent.setClass(this, StudentDetailsActivity::class.java)
         intent.putExtra("student", pos)
         startActivity(intent)
-
     }
 
+    private fun toNew(){
+        startActivity(Intent(this, AddStudentActivity::class.java))
+    }
 }
