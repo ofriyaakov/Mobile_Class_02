@@ -13,13 +13,18 @@ class Model private constructor() {
             val student = Student(
                 name = "Name $i",
                 id = i.toString(),
-                avatarUrl = "",
-                isChecked = false
+                isChecked = false,
+                phone = "",
+                address = ""
             )
 
             students.add(student)
         }
     }
 
+    fun addStudent(student: Student, callback: () -> Unit) {
+        students.add(student)
+        callback()
+    }
 
 }
