@@ -12,6 +12,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +27,6 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         fun onItemClick(position: Int)
         fun onItemClick(student: Student?)
     }
-
 
     var students: MutableList<Student>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +67,6 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 
-
     class StudentViewHolder(
         itemView: View,
         listener: OnItemClickListener?
@@ -101,8 +100,9 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
                 tag = position
             }
         }
+
     }
-    class StudentsRecyclerAdapter(private val students: MutableList<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
+    inner class StudentsRecyclerAdapter(private val students: MutableList<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
         var listener: OnItemClickListener? = null
         override fun getItemCount(): Int = students?.size ?: 0
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
@@ -118,6 +118,19 @@ class StudentsRecyclerViewActivity : AppCompatActivity() {
                 student = students?.get(position),
                 position = position
             )
+
+            holder.itemView.setOnClickListener {
+                toDetails(position)
+            }
+
         }
     }
+
+    private fun toDetails(pos: Int){
+        intent.setClass(this, StudentDetailsActivity::class.java)
+        intent.putExtra("student", pos)
+        startActivity(intent)
+
+    }
+
 }
