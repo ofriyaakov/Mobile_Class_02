@@ -2,7 +2,6 @@ package com.example.studentsapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -11,8 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.studentsapp.model.Model
 import com.example.studentsapp.model.Student
 
@@ -31,7 +28,7 @@ class EditStudentActivity : AppCompatActivity() {
         val deleteButton: Button = findViewById(R.id.deleteButton)
         val saveButton: Button = findViewById(R.id.saveButton)
         val studentIndex: Int = intent.getIntExtra("student", 0)
-        val student = getStudentDataFromIntent(studentIndex)
+        val student = getStudent(studentIndex)
 
         setStudentDetails(student)
 
@@ -50,7 +47,7 @@ class EditStudentActivity : AppCompatActivity() {
         }
     }
 
-    private fun getStudentDataFromIntent(studentIndex: Int) : Student? {
+    private fun getStudent(studentIndex: Int) : Student? {
         return Model.shared.students[studentIndex]
     }
 

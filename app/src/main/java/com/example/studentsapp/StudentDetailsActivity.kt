@@ -1,8 +1,6 @@
 package com.example.studentsapp
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
@@ -27,7 +25,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         val cancelButton: Button = findViewById(R.id.cancelButton)
         val editButton: Button = findViewById(R.id.editButton)
         val studentIndex: Int = intent.getIntExtra("student", 0)
-        val student = getStudentDataFromIntent(studentIndex)
+        val student = getStudent(studentIndex)
         setStudentDetails(student)
 
         cancelButton.setOnClickListener {
@@ -40,7 +38,7 @@ class StudentDetailsActivity : AppCompatActivity() {
 
     }
 
-    private fun getStudentDataFromIntent(studentIndex: Int) : Student? {
+    private fun getStudent(studentIndex: Int) : Student? {
         return Model.shared.students[studentIndex]
     }
 
