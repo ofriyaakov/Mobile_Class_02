@@ -24,6 +24,7 @@ class EditStudentActivity : AppCompatActivity() {
 
         val cancelButton: Button = findViewById(R.id.cancelButton)
         val deleteButton: Button = findViewById(R.id.deleteButton)
+        val saveButton: Button = findViewById(R.id.saveButton)
 
         cancelButton.setOnClickListener {
             finish()
@@ -32,6 +33,12 @@ class EditStudentActivity : AppCompatActivity() {
         deleteButton.setOnClickListener {
             val student = getStudentDataFromIntent()
             onDeleteClicked(student)
+            finish()
+        }
+
+        saveButton.setOnClickListener {
+            val student = getStudentDataFromIntent()
+            updateStudentValues(student)
             finish()
         }
     }
@@ -45,5 +52,20 @@ class EditStudentActivity : AppCompatActivity() {
         Model.shared.deleteStudent(student) {
             finish()
         }
+    }
+
+    private fun updateStudentValues(student: Student?) {
+
+        val editNameValue: EditText = findViewById(R.id.editName)
+        val editedIdValue: EditText = findViewById(R.id.editId)
+        val editPhoneValue: EditText = findViewById(R.id.editPhone)
+        val editAddressValue: EditText = findViewById(R.id.editAddress)
+        val checkboxValue: CheckBox = findViewById(R.id.checkBox)
+
+        student?.id = editedIdValue.text?.toString() ?: ""
+        student?.name = editNameValue.text?.toString() ?: ""
+        student?.phone = editPhoneValue.text?.toString() ?: ""
+        student?.address = editAddressValue.text?.toString() ?: ""
+        student?.isChecked = checkboxValue.isChecked
     }
 }
