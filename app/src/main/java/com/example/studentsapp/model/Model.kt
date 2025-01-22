@@ -27,4 +27,9 @@ class Model private constructor() {
         callback()
     }
 
+    fun deleteStudent(student: Student?, callback: () -> Unit) {
+        students.remove(student)
+        callback()
+    }
+
 }
