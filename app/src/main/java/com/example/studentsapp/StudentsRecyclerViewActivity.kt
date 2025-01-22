@@ -20,7 +20,6 @@ import com.example.studentsapp.model.Student
 class StudentsRecyclerViewActivity : AppCompatActivity() {
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
         fun onItemClick(student: Student?)
     }
 
