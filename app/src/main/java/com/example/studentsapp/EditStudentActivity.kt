@@ -1,5 +1,6 @@
 package com.example.studentsapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -10,6 +11,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.studentsapp.model.Model
 import com.example.studentsapp.model.Student
 
@@ -38,7 +41,7 @@ class EditStudentActivity : AppCompatActivity() {
 
         deleteButton.setOnClickListener {
             onDeleteClicked(student)
-            finish()
+            startActivity(Intent(this, StudentsRecyclerViewActivity::class.java))
         }
 
         saveButton.setOnClickListener {
