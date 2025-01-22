@@ -46,7 +46,7 @@ class EditStudentActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             updateStudentValues(student)
-            finish()
+            startActivity(Intent(this, StudentsRecyclerViewActivity::class.java))
         }
     }
 
