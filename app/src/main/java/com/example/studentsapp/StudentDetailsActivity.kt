@@ -1,12 +1,14 @@
 package com.example.studentsapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.studentsapp.model.Model
 import com.example.studentsapp.model.Student
 
 class StudentDetailsActivity : AppCompatActivity() {
@@ -25,8 +27,8 @@ class StudentDetailsActivity : AppCompatActivity() {
     }
 
     private fun getStudentDataFromIntent() : Student? {
-        val student: Student? = intent.getParcelableExtra("student")
-        return student
+        val studentIndex: Int = intent.getIntExtra("student", 0)
+        return Model.shared.students[studentIndex]
     }
 
     private fun setStudentDetails(student: Student?) {
