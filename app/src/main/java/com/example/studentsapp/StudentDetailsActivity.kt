@@ -2,6 +2,7 @@ package com.example.studentsapp
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -24,6 +25,13 @@ class StudentDetailsActivity : AppCompatActivity() {
 
         val student = getStudentDataFromIntent()
         setStudentDetails(student)
+
+        val cancelButton: Button = findViewById(R.id.cancelButton)
+
+        cancelButton.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun getStudentDataFromIntent() : Student? {
