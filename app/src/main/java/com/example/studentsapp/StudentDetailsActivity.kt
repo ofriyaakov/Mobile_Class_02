@@ -1,5 +1,6 @@
 package com.example.studentsapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -23,19 +24,23 @@ class StudentDetailsActivity : AppCompatActivity() {
             insets
         }
 
-        val student = getStudentDataFromIntent()
-        setStudentDetails(student)
-
         val cancelButton: Button = findViewById(R.id.cancelButton)
+        val editButton: Button = findViewById(R.id.editButton)
+        val studentIndex: Int = intent.getIntExtra("student", 0)
+        val student = getStudentDataFromIntent(studentIndex)
+        setStudentDetails(student)
 
         cancelButton.setOnClickListener {
             finish()
         }
 
+        editButton.setOnClickListener {
+            toEdit(studentIndex)
+        }
+
     }
 
-    private fun getStudentDataFromIntent() : Student? {
-        val studentIndex: Int = intent.getIntExtra("student", 0)
+    private fun getStudentDataFromIntent(studentIndex: Int) : Student? {
         return Model.shared.students[studentIndex]
     }
 
@@ -52,4 +57,11 @@ class StudentDetailsActivity : AppCompatActivity() {
         addressValue.text = student?.address
         isChecked.isChecked = student?.isChecked ?: false
     }
+
+    private fun toEdit(studentIndex: Int){
+        intent.setClass(this, EditStudentActivity::class.java)
+        intent.getIntExtra("student", studentIndex)
+        startActivity(intent)
+    }
+
 }

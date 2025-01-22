@@ -1,9 +1,11 @@
 package com.example.studentsapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,27 +27,28 @@ class EditStudentActivity : AppCompatActivity() {
         val cancelButton: Button = findViewById(R.id.cancelButton)
         val deleteButton: Button = findViewById(R.id.deleteButton)
         val saveButton: Button = findViewById(R.id.saveButton)
+        val studentIndex: Int = intent.getIntExtra("student", 0)
+        val student = getStudentDataFromIntent(studentIndex)
+
+        setStudentDetails(student)
 
         cancelButton.setOnClickListener {
             finish()
         }
 
         deleteButton.setOnClickListener {
-            val student = getStudentDataFromIntent()
             onDeleteClicked(student)
             finish()
         }
 
         saveButton.setOnClickListener {
-            val student = getStudentDataFromIntent()
             updateStudentValues(student)
             finish()
         }
     }
 
-    private fun getStudentDataFromIntent() : Student? {
-        val student: Student? = intent.getParcelableExtra("student")
-        return student
+    private fun getStudentDataFromIntent(studentIndex: Int) : Student? {
+        return Model.shared.students[studentIndex]
     }
 
     private fun onDeleteClicked(student: Student?) {
@@ -67,5 +70,19 @@ class EditStudentActivity : AppCompatActivity() {
         student?.phone = editPhoneValue.text?.toString() ?: ""
         student?.address = editAddressValue.text?.toString() ?: ""
         student?.isChecked = checkboxValue.isChecked
+    }
+
+    private fun setStudentDetails(student: Student?) {
+        val nameValue: TextView = findViewById(R.id.editName)
+        val idValue: TextView = findViewById(R.id.editId)
+        val phoneValue: TextView = findViewById(R.id.editPhone)
+        val addressValue: TextView = findViewById(R.id.editAddress)
+        val isChecked: CheckBox = findViewById(R.id.checkBox)
+
+        nameValue.text = student?.name
+        idValue.text = student?.id
+        phoneValue.text = student?.phone
+        addressValue.text = student?.address
+        isChecked.isChecked = student?.isChecked ?: false
     }
 }
